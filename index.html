@@ -38,7 +38,10 @@ body {
     background: black;
     color: white;
     border-radius: 20px;
-    overflow: hidden;
+
+    height: auto;
+    transition: all 0.5s ease;
+
     position: relative;
     box-shadow: 0 0 30px rgba(255, 105, 180, 0.2);
 }
@@ -77,6 +80,49 @@ body {
 #texto {
     opacity: 1;
     transition: opacity 0.5s ease;
+    line-height: 1.6;
+    font-size: 18px;
+}
+
+/* BOTÃO */
+.btn {
+    margin-top: 20px;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+
+    background: linear-gradient(45deg, #ff4d6d, #ff85a2);
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* HOVER */
+.btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(255, 105, 180, 0.8);
+}
+
+/* CLIQUE */
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* GLOW */
+.btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #ff4d6d, #ff85a2);
+    z-index: -1;
+    filter: blur(15px);
+    opacity: 0.5;
 }
 
 /* ESTRELAS */
@@ -167,7 +213,6 @@ body {
 
 <body>
 
-<!-- INTRO -->
 <div id="intro">
     <div class="intro-content">
         <h1>💖</h1>
@@ -176,17 +221,16 @@ body {
 </div>
 
 <div class="page">
-
 <div id="container">
 
 <div id="stars"></div>
 
 <h1>NOMEDELA 💖</h1>
-
 <h2>✨ Uma pequena história ✨</h2>
+
 <p id="texto"></p>
 
-<button onclick="proximoTexto()">Continuar 💌</button>
+<button class="btn" onclick="proximoTexto()">Continuar 💌</button>
 
 <div id="final">
     <div class="final-container">
@@ -199,6 +243,23 @@ body {
             </p>
 
             <p id="msgExtra" class="extra">
+                Esse é todo o tempo que te conheço…<br><br>
+                
+                E a cada segundo que passa,
+                você se torna alguém ainda mais especial 💖<br><br>
+                
+                Feliz aniversário 🎂✨<br><br>
+                
+                Que esse seja só mais um
+                de muitos anos incríveis na sua vida...<br><br>
+                
+                Porque você merece tudo de melhor
+                que esse mundo pode oferecer 💕<br><br>
+                
+                E eu espero, de verdade,
+                poder continuar fazendo parte
+                da sua história 💖<br><br>
+
                 Quero muito mais tempo ao seu lado 💕
             </p>
         </div>
@@ -232,43 +293,51 @@ intro.addEventListener("click", () => {
 
 /* HISTORIA */
 const historia = [ 
-`Oi... eu preparei isso só pra você 💖
-Talvez você nem imagine o quanto é importante pra mim...
-Mas tudo começou em um dia bem específico...
-Um dia que, sem perceber, mudou tudo ✨
-Desde então, cada conversa, cada risada...`,
 
-`foi se tornando algo que eu guardo com muito carinho ❤️
-Sem perceber acabei amando o jeito que você fala
-E amando o jeito que você sente
-Quando jogamos juntos é um momento maravilhoso para mim
-Já passamos por muitas coisas e desentendimentos...`,
+`Hoje não é um dia qualquer... 🎂
 
-`mas se nossa amizade continua forte aqui, não é algo passageiro
-Mas ainda tem algo que eu preciso te mostrar...
-Porque não é só sobre momentos...
-É sobre como você faz tudo parecer mais leve 🌸
-Mesmo nos dias difíceis...`,
+É o dia em que o mundo ficou melhor,
+porque você nasceu 💖`,
 
-`você consegue trazer paz pro meu coração
-E eu nem sei explicar direito como isso acontece...
-Só sei que acontece, e é especial ✨
-Seu jeito ficou guardado em mim
-Nas pequenas coisas, nos detalhes...`,
+`Oi...
+eu preparei isso só pra você 💖
 
-`Na forma como você ri, como você reage, como você existe 💫
-E talvez eu nunca tenha dito isso claramente...
-Mas você faz diferença na minha vida, muita diferença ❤️
-Não importa o tempo que passe...
-Nem a distância, nem as fases...`,
+Talvez você nem imagine
+o quanto é importante pra mim...`,
 
-`Tem coisas que simplesmente ficam...
-E você é uma delas 💖
-Se um dia você duvidar do seu valor...
-Eu espero que lembre de tudo isso
-Porque pra mim...`,
+`Mas tudo começou
+em um dia bem específico...
 
-`Você é alguém impossível de esquecer ✨`
+Um dia que,
+sem perceber,
+mudou tudo ✨`,
+
+`Desde então,
+cada conversa,
+cada risada...
+
+foi virando algo
+que guardo com carinho ❤️`,
+
+`Você sabia...? 💭
+
+Que você é uma das melhores coisas
+que já me aconteceu?
+
+E que eu sou muito grato
+por ter você na minha vida 💖`,
+
+`Sem perceber,
+acabei amando
+o jeito que você fala...
+
+e o jeito que você sente 💫`,
+
+`Quando jogamos juntos...
+é um momento maravilhoso pra mim 🎮💖
+
+E mesmo com tudo,
+a gente continua aqui...`
 ];
 
 let index = 0;
@@ -281,6 +350,9 @@ function proximoTexto() {
         escreverTexto(historia[index]);
         index++;
     } else {
+        // BOTÃO SOME DIRETO
+        document.querySelector(".btn").style.display = "none";
+
         mostrarFinal();
     }
 }
@@ -292,14 +364,13 @@ function escreverTexto(texto) {
     el.style.opacity = 0;
 
     setTimeout(() => {
-        el.innerHTML = texto;
+        el.innerHTML = texto.replace(/\n/g, "<br>");
         el.style.opacity = 1;
         digitando = false;
     }, 200);
 }
 
 function mostrarFinal() {
-    document.getElementById("botao")?.remove();
     document.getElementById("texto").style.display = "none";
 
     const final = document.getElementById("final");
@@ -312,7 +383,7 @@ function mostrarFinal() {
 
     setTimeout(() => {
         document.getElementById("msgExtra").style.opacity = "1";
-    }, 3000);
+    }, 1500);
 }
 
 /* CONTADOR */

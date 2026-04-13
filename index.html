@@ -173,8 +173,10 @@ body {
 }
 
 .extra {
-    opacity:0;
-    transition:2s;
+    display: none;
+    opacity: 0;
+    transition: opacity 2s;
+    margin-top: 20px;
 }
 
 .lado-coracao {
@@ -226,7 +228,7 @@ body {
 <div id="stars"></div>
 
 <h1>NOMEDELA 💖</h1>
-<h2>✨ Uma pequena história ✨</h2>
+<h2 id="subtitulo">✨ Uma pequena história ✨</h2>
 
 <p id="texto"></p>
 
@@ -241,6 +243,11 @@ body {
                 E a cada segundo que passa,<br>
                 você se torna alguém ainda mais especial 💖
             </p>
+        </div>
+
+        <div class="lado-coracao">
+            <img class="heart-img" src="https://images.vexels.com/media/users/3/151200/isolated/preview/71b99b7323bfd07bab3fc7dd973261e1-elemento-hippie-coracao-vermelho.png">
+            <div id="tempo"></div>
 
             <p id="msgExtra" class="extra">
                 Esse é todo o tempo que te conheço…<br><br>
@@ -262,11 +269,6 @@ body {
 
                 Quero muito mais tempo ao seu lado 💕
             </p>
-        </div>
-
-        <div class="lado-coracao">
-            <img class="heart-img" src="https://images.vexels.com/media/users/3/151200/isolated/preview/71b99b7323bfd07bab3fc7dd973261e1-elemento-hippie-coracao-vermelho.png">
-            <div id="tempo"></div>
         </div>
 
     </div>
@@ -293,7 +295,6 @@ intro.addEventListener("click", () => {
 
 /* HISTORIA */
 const historia = [ 
-
 `Hoje não é um dia qualquer... 🎂
 
 É o dia em que o mundo ficou melhor,
@@ -334,10 +335,28 @@ o jeito que você fala...
 e o jeito que você sente 💫`,
 
 `Quando jogamos juntos...
-é um momento maravilhoso pra mim 🎮💖
+é um momento maravilhoso pra mim 💖
 
 E mesmo com tudo,
-a gente continua aqui...`
+a gente continua aqui...`,
+
+`Eu gosto muito de você 💖`,
+
+`Você me faz sorrir
+de um jeito diferente ✨`,
+
+`Conversar com você
+sempre melhora meu dia 💕`,
+
+`Seu jeito é simplesmente incrível 💫`,
+
+`Você é uma pessoa muito especial pra mim 💖`,
+
+`Eu adoro passar tempo com você 💖`,
+
+`E sinceramente...
+quero viver muitos momentos
+ao seu lado 💕`
 ];
 
 let index = 0;
@@ -350,9 +369,7 @@ function proximoTexto() {
         escreverTexto(historia[index]);
         index++;
     } else {
-        // BOTÃO SOME DIRETO
         document.querySelector(".btn").style.display = "none";
-
         mostrarFinal();
     }
 }
@@ -373,6 +390,9 @@ function escreverTexto(texto) {
 function mostrarFinal() {
     document.getElementById("texto").style.display = "none";
 
+    /* 🔥 TROCA O TÍTULO AQUI */
+    document.getElementById("subtitulo").innerHTML = "✨ Obrigado por existir ✨";
+
     const final = document.getElementById("final");
     final.style.display = "block";
 
@@ -382,12 +402,18 @@ function mostrarFinal() {
     criarParticulas();
 
     setTimeout(() => {
-        document.getElementById("msgExtra").style.opacity = "1";
+        const extra = document.getElementById("msgExtra");
+        extra.style.display = "block";
+
+        setTimeout(() => {
+            extra.style.opacity = "1";
+        }, 50);
+
     }, 1500);
 }
 
 /* CONTADOR */
-const dataInicio = new Date("2024-05-10");
+const dataInicio = new Date("2025-06-11");
 
 function iniciarContador() {
     setInterval(() => {

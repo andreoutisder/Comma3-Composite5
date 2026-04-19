@@ -8,7 +8,6 @@
 
 <style>
 
-
 body {
     margin: 0;
     padding: 0;
@@ -41,6 +40,25 @@ body {
     position: relative;
     box-shadow: 0 0 30px rgba(255, 105, 180, 0.2);
 }
+
+.spotify-link {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(45deg, #1DB954, #1ed760);
+    box-shadow: 0 0 15px rgba(30, 215, 96, 0.5);
+    transition: 0.3s;
+}
+
+.spotify-link:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(30, 215, 96, 0.9);
+}
+
 
 #intro {
     position: fixed;
@@ -116,20 +134,12 @@ body {
 }
 
 #stars {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    pointer-events: none;
 }
 
-.star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    border-radius: 50%;
-    animation: piscar 2s infinite alternate;
+.particle {
+    pointer-events: none;
 }
-
 @keyframes piscar {
     from { opacity: 0.2; }
     to { opacity: 1; }
@@ -268,7 +278,11 @@ body {
                 poder continuar fazendo parte
                 da sua história 💖<br><br>
 
-               
+                Fiz uma playlist pra você 💕<br><br>
+
+                <a class="spotify-link" href="https://open.spotify.com/playlist/6nLHfSdZ4ODM1m9GNFsBu1?si=019013ce03b24277" target="_blank">
+                    🎧 Ouvir nossa playlist
+                </a>
             </p>
         </div>
 
@@ -288,6 +302,7 @@ body {
 
     </div>
 </div>
+
 
 </div>
 

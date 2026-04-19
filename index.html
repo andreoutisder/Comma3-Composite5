@@ -240,13 +240,12 @@ body {
     </div>
 </div>
 
-<!-- ===== SEU CONTEÚDO ORIGINAL ===== -->
 <div id="conteudo" style="display:none;">
 
 <div id="stars"></div>
 
-<h1>NOMEDELA 💖</h1>
-<h2 id="subtitulo">✨ Uma pequena história ✨</h2>
+<h1>💖BEBEZINHA💖</h1>
+<h2 id="subtitulo">✨VOCÊ MERECE O MUNDO✨</h2>
 
 <p id="texto"></p>
 
@@ -297,7 +296,6 @@ body {
 
 <script>
 
-/* INTRO */
 const intro = document.getElementById("intro");
 const page = document.querySelector(".page");
 
@@ -310,7 +308,6 @@ intro.addEventListener("click", () => {
     }, 800);
 });
 
-/* ===== JOGO ===== */
 let etapa = 0;
 const target = document.getElementById("target");
 const area = document.getElementById("gameArea");
@@ -351,7 +348,6 @@ function startStory(){
     conteudo.style.display="block";
 }
 
-/* ===== SEU SCRIPT ORIGINAL (COM TODOS OS TEXTOS) ===== */
 const historia = [ 
 `Hoje não é um dia qualquer... 🎂
 
@@ -440,14 +436,14 @@ function proximoTexto() {
 
         const btn = document.getElementById("btnContinuar");
 
-        // 💖 MUDA TEXTO
+    
         btn.innerText = "eu te amo 💖";
 
-        // 🚫 DESATIVA
+
         btn.disabled = true;
         btn.style.cursor = "default";
 
-        // ✨ ESTILO FINAL
+        
         btn.style.opacity = "0.9";
         btn.style.background = "linear-gradient(45deg, #ff85a2, #ff4d6d)";
         btn.style.transform = "scale(1.1)";

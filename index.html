@@ -346,12 +346,16 @@ target.onclick = () => {
 };
 
 function fugir(btn){
-    btn.style.position="relative";
-    btn.style.left=(Math.random()*100-50)+"px";
+    btn.style.position = "relative";
+    btn.style.left = (Math.random()*200 - 100) + "px";
+    btn.style.top = (Math.random()*100 - 50) + "px";
 }
 
-no1.onmouseover=()=>fugir(no1);
-no2.onmouseover=()=>fugir(no2);
+no1.onmouseover = () => fugir(no1);
+no2.onmouseover = () => fugir(no2);
+
+no1.onclick = () => fugir(no1);
+no2.onclick = () => fugir(no2);
 
 function nextConfirm(){
     confirm1.style.display="none";

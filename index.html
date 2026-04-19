@@ -8,7 +8,7 @@
 
 <style>
 
-/* RESET + FUNDO */
+/* ===== SEU CSS ORIGINAL (INALTERADO) ===== */
 body {
     margin: 0;
     padding: 0;
@@ -16,7 +16,6 @@ body {
     font-family: Arial;
 }
 
-/* CENTRALIZAÇÃO */
 .page {
     min-height: 100vh;
     display: flex;
@@ -29,7 +28,6 @@ body {
     transition: opacity 1s ease, transform 1s ease;
 }
 
-/* CONTAINER */
 #container {
     text-align: center;
     padding: 20px;
@@ -38,15 +36,12 @@ body {
     background: black;
     color: white;
     border-radius: 20px;
-
     height: auto;
     transition: all 0.5s ease;
-
     position: relative;
     box-shadow: 0 0 30px rgba(255, 105, 180, 0.2);
 }
 
-/* INTRO */
 #intro {
     position: fixed;
     width: 100%;
@@ -76,7 +71,6 @@ body {
     100% { transform: scale(1); opacity: 0.8; }
 }
 
-/* TEXTO */
 #texto {
     opacity: 1;
     transition: opacity 0.5s ease;
@@ -84,7 +78,6 @@ body {
     font-size: 18px;
 }
 
-/* BOTÃO */
 .btn {
     margin-top: 20px;
     padding: 12px 28px;
@@ -102,18 +95,15 @@ body {
     position: relative;
 }
 
-/* HOVER */
 .btn:hover {
     transform: scale(1.08);
     box-shadow: 0 0 25px rgba(255, 105, 180, 0.8);
 }
 
-/* CLIQUE */
 .btn:active {
     transform: scale(0.95);
 }
 
-/* GLOW */
 .btn::after {
     content: "";
     position: absolute;
@@ -125,7 +115,6 @@ body {
     opacity: 0.5;
 }
 
-/* ESTRELAS */
 #stars {
     position: absolute;
     width: 100%;
@@ -151,7 +140,6 @@ body {
     z-index: 1;
 }
 
-/* FINAL */
 #final {
     display:none;
     margin-top:30px;
@@ -198,16 +186,21 @@ body {
     to { transform: translateY(-300px); opacity:0; }
 }
 
-/* MOBILE */
-@media (max-width: 600px) {
-    .final-container {
-        flex-direction:column;
-        text-align:center;
-    }
-
-    .lado-texto {
-        text-align:center;
-    }
+/* ===== JOGO ===== */
+#gameWrapper { text-align:center; }
+#gameArea {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin:20px auto;
+}
+#target {
+    position:absolute;
+    width:40px;
+    height:40px;
+    background:#ff85a2;
+    border-radius:50%;
+    cursor:pointer;
 }
 
 </style>
@@ -225,6 +218,31 @@ body {
 <div class="page">
 <div id="container">
 
+<!-- ===== JOGO ===== -->
+<div id="gameWrapper">
+    <h2>Você quer mesmo ver? 💭</h2>
+    <p>Clique no coração 5 vezes 💖</p>
+
+    <div id="gameArea">
+        <div id="target"></div>
+    </div>
+
+    <div id="confirm1" style="display:none;">
+        <h2>Tem certeza?</h2>
+        <button class="btn" onclick="nextConfirm()">SIM</button>
+        <button id="no1" class="btn">NÃO</button>
+    </div>
+
+    <div id="confirm2" style="display:none;">
+        <h2>Última chance 😈</h2>
+        <button class="btn" onclick="startStory()">SIM</button>
+        <button id="no2" class="btn">NÃO</button>
+    </div>
+</div>
+
+<!-- ===== SEU CONTEÚDO ORIGINAL ===== -->
+<div id="conteudo" style="display:none;">
+
 <div id="stars"></div>
 
 <h1>NOMEDELA 💖</h1>
@@ -232,29 +250,13 @@ body {
 
 <p id="texto"></p>
 
-<button class="btn" onclick="proximoTexto()">Continuar 💌</button>
+<button id="btnContinuar" class="btn" onclick="proximoTexto()">Continuar 💌</button>
 
 <div id="final">
     <div class="final-container">
 
         <div class="lado-texto">
             <p>
-                Esse é todo o tempo que te conheço…<br><br>
-                E a cada segundo que passa,<br>
-                você se torna alguém ainda mais especial 💖
-            </p>
-        </div>
-
-        <div class="lado-coracao">
-            <img class="heart-img" src="https://images.vexels.com/media/users/3/151200/isolated/preview/71b99b7323bfd07bab3fc7dd973261e1-elemento-hippie-coracao-vermelho.png">
-            <div id="tempo"></div>
-
-            <p id="msgExtra" class="extra">
-                Esse é todo o tempo que te conheço…<br><br>
-                
-                E a cada segundo que passa,
-                você se torna alguém ainda mais especial 💖<br><br>
-                
                 Feliz aniversário 🎂✨<br><br>
                 
                 Que esse seja só mais um
@@ -267,11 +269,27 @@ body {
                 poder continuar fazendo parte
                 da sua história 💖<br><br>
 
+               
+            </p>
+        </div>
+
+        <div class="lado-coracao">
+            <img class="heart-img" src="https://images.vexels.com/media/users/3/151200/isolated/preview/71b99b7323bfd07bab3fc7dd973261e1-elemento-hippie-coracao-vermelho.png">
+            <div id="tempo"></div>
+
+            <p id="msgExtra" class="extra">
+               
+                 Esse é todo o tempo que te conheço…<br><br>
+                E a cada segundo que passa,<br>
+                você se torna alguém ainda mais especial 💖<br>
+
                 Quero muito mais tempo ao seu lado 💕
             </p>
         </div>
 
     </div>
+</div>
+
 </div>
 
 </div>
@@ -285,7 +303,6 @@ const page = document.querySelector(".page");
 
 intro.addEventListener("click", () => {
     intro.style.opacity = "0";
-
     setTimeout(() => {
         intro.style.display = "none";
         page.style.opacity = "1";
@@ -293,106 +310,146 @@ intro.addEventListener("click", () => {
     }, 800);
 });
 
-/* HISTORIA */
+/* ===== JOGO ===== */
+let etapa = 0;
+const target = document.getElementById("target");
+const area = document.getElementById("gameArea");
+
+function mover(){
+    const maxX = area.clientWidth - 40;
+    const maxY = area.clientHeight - 40;
+    target.style.left = Math.random()*maxX + "px";
+    target.style.top = Math.random()*maxY + "px";
+}
+mover();
+
+target.onclick = () => {
+    etapa++;
+    if(etapa < 5){
+        mover();
+    } else {
+        gameArea.style.display="none";
+        confirm1.style.display="block";
+    }
+};
+
+function fugir(btn){
+    btn.style.position="relative";
+    btn.style.left=(Math.random()*100-50)+"px";
+}
+
+no1.onmouseover=()=>fugir(no1);
+no2.onmouseover=()=>fugir(no2);
+
+function nextConfirm(){
+    confirm1.style.display="none";
+    confirm2.style.display="block";
+}
+
+function startStory(){
+    gameWrapper.style.display="none";
+    conteudo.style.display="block";
+}
+
+/* ===== SEU SCRIPT ORIGINAL (COM TODOS OS TEXTOS) ===== */
 const historia = [ 
 `Hoje não é um dia qualquer... 🎂
 
-É o dia em que o mundo ficou melhor,
-porque você nasceu 💖`,
+É o dia em que o mundo ganhou um motivo a mais pra ser bonito, porque você nasceu 🩷`,
 
-`Oi...
-eu preparei isso só pra você 💖
+`Oi... eu preparei isso só pra você 🩷 Talvez você nem faça ideia do quanto é importante pra mim... mas, de algum jeito, você se tornou alguém essencial`,
 
-Talvez você nem imagine
-o quanto é importante pra mim...`,
+`Mas tudo começou em um dia específico...
 
-`Mas tudo começou
-em um dia bem específico...
+um daqueles dias simples que, sem aviso, mudam tudo 🩷`,
 
-Um dia que,
-sem perceber,
-mudou tudo ✨`,
+`Eu lembro quando entrei na sua live... e senti uma felicidade leve, daquelas que aquecem o coração e fazem a gente querer ficar ali 🩷`,
 
-`Eu lembro de quando entrei
-na sua live stream...
+`Depois disso, eu passei a esperar pelo momento em que você apareceria de novo... por mais uma conversa, mais um instante 🩷`,
 
-e fiquei extremamente feliz
-por estar ali 💖`,
+`E aos poucos,
 
-`Depois disso,
-eu ficava esperando...
-
-pelo dia que você iria abrir
-a live novamente ✨`,
-
-`Desde então,
 cada conversa,
 cada risada...
 
-foi virando algo
-que guardo com carinho ❤️`,
+foi se tornando algo que hoje eu guardo com muito carinho 🩷`,
 
-`Você sabia...? 💭
+`Você sabia...? 🩷
 
-Que você é uma das melhores coisas
-que já me aconteceu?
+Que você é uma das coisas mais bonitas que já me aconteceram?
+Sou muito grato por você estar na minha vida`,
 
-E que eu sou muito grato
-por ter você na minha vida 💖`,
+`Sem perceber, eu fui me encantando pelo seu jeito de falar...
 
-`Sem perceber,
-acabei amando
-o jeito que você fala...
+e pela forma como você sente, pela maneira que você sorri quando está com vergonha, 
+pelo jeito que você é realmente`,
 
-e o jeito que você sente 💫`,
+`Quando a gente joga junto, tudo parece mais leve pra mim, mais simples, mais feliz 🩷`,
 
-`Quando jogamos juntos...
-é um momento maravilhoso pra mim 💖
+`E mesmo com o tempo passando...
 
-E mesmo com tudo,
-a gente continua aqui...`,
+até nos momentos em que a gente se perde,
+nos desencontros,
+nos dias em que a tristeza aparece...
 
-`Eu amo falar com você...
+a gente ainda escolhe ficar`,
 
-até mesmo quando
-não tenho nada pra dizer 💕`,
+`Mesmo quando faltam palavras,
 
-`Porque só a sua presença
-na minha vida...
+a gente se entende,
+se acolhe...
 
-já é algo que eu valorizo muito
-e amo de verdade 💖`,
+e continua ali,
+um pelo outro, sem soltar a mão 🩷`,
 
-`Eu gosto muito de você 💖`,
+`Eu amo falar com você... até nos momentos em que não tenho nada pra dizer, porque só estar ali com você já basta 🩷`,
 
-`Você me faz sorrir
-de um jeito diferente ✨`,
+`Porque só ter você na minha vida é algo que eu valorizo mais do que consigo explicar.
 
-`Conversar com você
-sempre melhora meu dia 💕`,
+De um jeito simples e verdadeiro você traz alegria para todos ao seu redor e comigo não foi difrente 🩷`,
 
-`Seu jeito é simplesmente incrível 💫`,
+`Você me faz sorrir de um jeito único, daquele tipo que simplesmente acontece 🩷`,
 
-`Você é uma pessoa muito especial pra mim 💖`,
+`Conversar com você sempre ilumina o meu dia, mesmo quando ele não começou tão bem 🩷`,
 
-`Eu adoro passar tempo com você 💖`,
+`Seu jeito tem algo simplesmente encantador...
 
-`E sinceramente...
-quero viver muitos momentos
-ao seu lado 💕`
+Você é muito especial pra mim 🩷`,
+
+`Você é alguem extramente importante para mim,
+de verdade 🩷`,
+
+`E eu quero viver muitos momentos ao seu lado, comemorar e apoiar cada objetivo e conquista sua...
+
+irei estar aqui,
+todos os dias 🩷`
 ];
-
 let index = 0;
 let digitando = false;
+  
 
 function proximoTexto() {
     if (digitando) return;
 
     if (index < historia.length) {
-        escreverTexto([index]);
+        escreverTexto(historia[index]);
         index++;
     } else {
-        document.querySelector(".btn").style.display = "none";
+
+        const btn = document.getElementById("btnContinuar");
+
+        // 💖 MUDA TEXTO
+        btn.innerText = "eu te amo 💖";
+
+        // 🚫 DESATIVA
+        btn.disabled = true;
+        btn.style.cursor = "default";
+
+        // ✨ ESTILO FINAL
+        btn.style.opacity = "0.9";
+        btn.style.background = "linear-gradient(45deg, #ff85a2, #ff4d6d)";
+        btn.style.transform = "scale(1.1)";
+
         mostrarFinal();
     }
 }
@@ -413,7 +470,6 @@ function escreverTexto(texto) {
 function mostrarFinal() {
     document.getElementById("texto").style.display = "none";
 
-    /* 🔥 TROCA O TÍTULO AQUI */
     document.getElementById("subtitulo").innerHTML = "✨ Obrigado por existir ✨";
 
     const final = document.getElementById("final");
@@ -435,7 +491,6 @@ function mostrarFinal() {
     }, 1500);
 }
 
-/* CONTADOR */
 const dataInicio = new Date("2025-06-11");
 
 function iniciarContador() {
@@ -451,7 +506,6 @@ function iniciarContador() {
     }, 1000);
 }
 
-/* PARTICULAS */
 function criarParticulas() {
     setInterval(() => {
         const p = document.createElement("div");
@@ -465,7 +519,6 @@ function criarParticulas() {
     }, 300);
 }
 
-/* ESTRELAS */
 function criarEstrelas() {
     const c = document.getElementById("stars");
 
